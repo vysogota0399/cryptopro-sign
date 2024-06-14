@@ -1,5 +1,5 @@
 import { exec } from 'child_process'
-import { logError } from './logUtils'
+import { logError, logDebug } from './logUtils'
 import { CERTIFICATE_PIN } from '../config'
 import { InternalException } from '../types/errors'
 import * as tempy from 'tempy'
@@ -23,7 +23,7 @@ let contrainerHash: string | null = null
 const getContainerHash = async () => {
   if (!contrainerHash) {
     const response = await execute('certmgr -list')
-    const match = response.match(/SHA1 Hash\s*: (\w+)$/m)
+    const match = response.match(/SHA1 Thumbprint\s*: (\w+)$/m)
     if (!match) {
       throw new InternalException('Cannot get container hash. It seems that service is not correctly configured')
     }
@@ -41,10 +41,15 @@ export const cryptoProSign = async (str: string): Promise<string> => {
     const dirName = dirname(tempFile)
     // eslint-disable-next-line max-len
     const cmd = `cryptcp -signf -dir "${dirName}" -thumbprint "${containerHash}" -norev -nochain "${tempFile}" -cert -der -strict -hashAlg "1.2.643.7.1.1.2.2" -detached -pin "${CERTIFICATE_PIN}"`
+    logDebug(`CERTIFICATE_PIN: ${CERTIFICATE_PIN}`)
+    logDebug(`dirName: ${dirName}`)
+    logDebug(`tempFile: ${tempFile}`)
+    logDebug(`signedFile: ${signedFile}`)
+    logDebug(`CMD: ${cmd}`)
     await execute(cmd)
     const result = await readFile(signedFile)
-    await unlink(signedFile)
-    await unlink(tempFile)
+    // await unlink(signedFile)
+    // await unlink(tempFile)
     return result.toString('base64')
   } catch (e) {
     logError(`sign error ${e}`, '', 'СryptoProSign')
