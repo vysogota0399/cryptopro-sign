@@ -1,0 +1,11 @@
+FROM ruby:3.1.2 
+ENV TZ="Europe/Moscow" \
+    docker="1"
+
+ARG app_path=/usr/src/app
+
+WORKDIR ${app_path}
+COPY Gemfile Gemfile.lock ./
+    
+RUN bundle install
+COPY . .
