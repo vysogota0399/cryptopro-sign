@@ -8,6 +8,7 @@ gem 'dry-system'
 gem 'dry-monads'
 gem 'dry-validation'
 gem 'semantic_logger'
+gem 'activesupport'
 
 group :development, :test do
   gem 'byebug'
