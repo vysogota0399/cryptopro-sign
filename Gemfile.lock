@@ -1,10 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.1.3.4)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      mutex_m
+      tzinfo (~> 2.0)
     base64 (0.2.0)
     bigdecimal (3.1.8)
     byebug (11.1.3)
     concurrent-ruby (1.3.3)
+    connection_pool (2.4.1)
+    drb (2.2.1)
     dry-auto_inject (1.0.1)
       dry-core (~> 1.0)
       zeitwerk (~> 2.6)
@@ -50,9 +62,13 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
+    i18n (1.14.5)
+      concurrent-ruby (~> 1.0)
+    minitest (5.24.1)
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
+    mutex_m (0.2.0)
     nio4r (2.7.3)
     puma (6.4.2)
       nio4r (~> 2.0)
@@ -81,6 +97,8 @@ GEM
       sinatra (= 4.0.0)
       tilt (~> 2.0)
     tilt (2.4.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     webrick (1.8.1)
     zeitwerk (2.6.16)
 
@@ -90,6 +108,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activesupport
   byebug
   dry-monads
   dry-system
