@@ -18,6 +18,7 @@ module Services
     def write_message_to_file(message)
       file = Tempfile.open('signature', 'tmp')
       file.write(message)
+      file.close
       Success(file)
     rescue StandardError => e
       logger.error('Sign failed [write_data_to_file]', e)
@@ -43,7 +44,6 @@ module Services
   
     def unlink(file)
       logger.debug { 'delete file' }
-      file.close
       file.unlink
     end
   
