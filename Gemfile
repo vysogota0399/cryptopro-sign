@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby '3.2.4'
+
 gem 'rackup'
 gem 'puma'
 gem 'sinatra'

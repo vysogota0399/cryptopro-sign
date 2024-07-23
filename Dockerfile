@@ -1,6 +1,6 @@
 # Базовый образ с КриптоПро
 #FROM debian:stretch-slim as cryptopro-generic
-FROM ruby:3.1.2 as cryptopro-generic
+FROM ruby:3.2.4 as cryptopro-generic
 # FROM ruby:latest as cryptopro-generic
 
 # Устанавливаем timezone
