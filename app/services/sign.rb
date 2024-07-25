@@ -10,13 +10,13 @@ module Services
       signature = yield create_signature(file_with_message)
       Success(signature)
     ensure
-      unlink(file_with_message)
+      file_with_message.unlink
     end
   
     private
   
     def write_message_to_file(message)
-      file = Tempfile.open('signature', 'tmp')
+      file = Tempfile.new('signature', 'tmp')
       file.write(message)
       file.close
       Success(file)
@@ -40,11 +40,6 @@ module Services
       signature_base64 = Base64.urlsafe_encode64(signature_bytes, padding: false)
       File.delete(signature_file)
       Success(signature_base64)
-    end
-  
-    def unlink(file)
-      logger.debug { 'delete file' }
-      file.unlink
     end
   
     def sign_alg = settings.sign_alg
